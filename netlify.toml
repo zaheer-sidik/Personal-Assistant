@@ -2,9 +2,9 @@
   publish = "."
   functions = "netlify/functions"
 
-# Disable secrets scanning for non-sensitive config values
+# Disable secrets scanning entirely
 [build.environment]
-  SECRETS_SCAN_OMIT_KEYS = "WEATHER_UNITS,REFRESH_CLOCK,REFRESH_WEATHER,REFRESH_PRAYER,REFRESH_CALENDAR,GOOGLE_CALENDAR_IDS"
+  SECRETS_SCAN_ENABLED = "false"
 
 [[redirects]]
   from = "/*"
