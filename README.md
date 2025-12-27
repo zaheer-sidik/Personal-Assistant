@@ -12,7 +12,6 @@ A beautiful, modern personal dashboard that displays your calendar events, praye
   - Current weather conditions
   - 24-hour hourly forecast
   - 7-day weekly forecast
-- **📝 Quick Notes**: Take notes that are saved locally in your browser
 - **⏰ Live Clock**: Real-time clock display
 - **🎨 Modern UI**: Dark theme with smooth animations and responsive design
 
@@ -118,6 +117,7 @@ prayer: {
 ```
 
 **Prayer Calculation Methods:**
+- 0 = Jafari School of Qom, Iran
 - 1 = University of Islamic Sciences, Karachi
 - 2 = Islamic Society of North America (ISNA)
 - 3 = Muslim World League
