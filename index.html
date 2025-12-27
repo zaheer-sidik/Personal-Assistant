@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Assistant Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="greeting">
+                <h1 id="greeting-text">Good Morning</h1>
+                <p id="current-date"></p>
+            </div>
+            <div class="quick-info">
+                <div id="current-time"></div>
+            </div>
+        </header>
+
+        <main class="dashboard">
+            <!-- Top Row: Prayer Times and Calendar -->
+            <div class="top-row">
+                <!-- Prayer Times Section -->
+                <section class="card prayer-times-section">
+                    <h2>🕌 Prayer Times</h2>
+                    <div id="prayer-times-container" class="multi-location-grid">
+                        <!-- Prayer times for all locations will be dynamically generated here -->
+                    </div>
+                </section>
+
+                <!-- Calendar Events Section -->
+                <section class="card calendar">
+                    <h2>📅 Today's Events</h2>
+                    <div id="calendar-events">
+                        <div class="loading">Loading calendar events...</div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Weather Section -->
+            <section class="card weather-section full-width">
+                <h2>🌤️ Weather</h2>
+                <div id="weather-container" class="multi-location-grid">
+                    <!-- Weather for all locations will be dynamically generated here -->
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Personal Assistant Dashboard • <span id="footer-time"></span></p>
+            <button id="refresh-btn" class="refresh-btn">🔄 Refresh Data</button>
+        </footer>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

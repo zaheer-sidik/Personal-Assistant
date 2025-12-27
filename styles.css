@@ -1,0 +1,643 @@
+:root {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-card: #334155;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --accent: #3b82f6;
+    --accent-hover: #2563eb;
+    --border: #475569;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, var(--bg-primary) 0%, #1a1f3a 100%);
+    color: var(--text-primary);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: var(--bg-secondary);
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.greeting h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.25rem;
+}
+
+.greeting p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+#current-time {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+/* Dashboard Grid */
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.top-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.multi-location-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1rem;
+    margin-top: 0.75rem;
+}
+
+.location-column {
+    background: var(--bg-card);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border);
+}
+
+.location-column h3 {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+    color: var(--accent);
+    text-align: center;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 0.4rem;
+}
+
+.full-width {
+    width: 100%;
+}
+
+/* Consolidated Prayer Times Table */
+.consolidated-prayer-table {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.prayer-table-row {
+    display: grid;
+    grid-template-columns: 120px repeat(auto-fit, minmax(100px, 1fr));
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--bg-card);
+    border-radius: 0.4rem;
+    align-items: center;
+    font-size: 0.95rem;
+}
+
+.prayer-table-header {
+    background: var(--bg-primary);
+    font-weight: 600;
+    color: var(--accent);
+    font-size: 0.9rem;
+}
+
+.prayer-table-row.next-prayer {
+    background: rgba(59, 130, 246, 0.15);
+    border: 2px solid var(--accent);
+}
+
+.prayer-table-cell {
+    text-align: center;
+}
+
+.prayer-name-cell {
+    text-align: left;
+    font-weight: 500;
+}
+
+/* Consolidated Weather Table */
+.consolidated-weather-table {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.weather-table-section h3 {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+
+.weather-current-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.75rem;
+}
+
+.weather-location-card {
+    background: var(--bg-card);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+}
+
+.weather-location-card h4 {
+    margin: 0 0 0.75rem 0;
+    color: var(--accent);
+    font-size: 1.1rem;
+}
+
+.weather-location-card .weather-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.4rem;
+}
+
+.weather-location-card .weather-icon {
+    font-size: 2.5rem;
+}
+
+.weather-location-card .weather-temp {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.weather-location-card .weather-description {
+    text-transform: capitalize;
+    margin-bottom: 0.75rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.weather-details-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* Forecast Table */
+.forecast-table {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.forecast-table-row {
+    display: grid;
+    grid-template-columns: 130px repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--bg-card);
+    border-radius: 0.4rem;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.forecast-table-header {
+    background: var(--bg-primary);
+    font-weight: 600;
+    color: var(--accent);
+}
+
+.forecast-table-cell {
+    text-align: center;
+}
+
+.forecast-icon {
+    font-size: 1.3rem;
+    margin-right: 0.4rem;
+}
+
+/* Card Styles */
+.card {
+    background: var(--bg-secondary);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.card h3 {
+    font-size: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+}
+
+/* Loading State */
+.loading {
+    text-align: center;
+    padding: 1rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+/* Prayer Times */
+.prayer-time-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    background: var(--bg-card);
+    border-radius: 0.5rem;
+    transition: background 0.2s;
+}
+
+.prayer-time-item:hover {
+    background: var(--bg-primary);
+}
+
+.prayer-time-item.active {
+    background: var(--accent);
+    color: white;
+    font-weight: 600;
+}
+
+.prayer-time-item.next {
+    border: 2px solid var(--accent);
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.prayer-name {
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.prayer-time {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* Weather */
+#weather-current {
+    padding: 1rem;
+    background: var(--bg-card);
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.current-weather {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.weather-main {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.weather-temp {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.weather-icon {
+    font-size: 3rem;
+}
+
+.weather-description {
+    text-transform: capitalize;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+.weather-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+}
+
+.weather-detail {
+    padding: 0.5rem;
+    background: var(--bg-primary);
+    border-radius: 0.25rem;
+}
+
+.weather-detail-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.weather-detail-value {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.weather-section {
+    margin-top: 1.5rem;
+}
+
+.hourly-forecast {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    padding: 1rem 0;
+}
+
+.hourly-item {
+    flex: 0 0 auto;
+    text-align: center;
+    padding: 1rem;
+    background: var(--bg-card);
+    border-radius: 0.5rem;
+    min-width: 100px;
+    transition: transform 0.2s;
+}
+
+.hourly-item:hover {
+    transform: scale(1.05);
+    background: var(--bg-primary);
+}
+
+.hourly-time {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--accent);
+}
+
+.hourly-icon {
+    font-size: 2rem;
+    margin: 0.5rem 0;
+}
+
+.hourly-temp {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.weekly-forecast {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.weekly-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: var(--bg-card);
+    border-radius: 0.5rem;
+    transition: background 0.2s;
+}
+
+.weekly-item:hover {
+    background: var(--bg-primary);
+}
+
+.weekly-day {
+    font-weight: 600;
+    min-width: 100px;
+}
+
+.weekly-icon {
+    font-size: 1.5rem;
+}
+
+.weekly-desc {
+    flex: 1;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+.weekly-temps {
+    display: flex;
+    gap: 1rem;
+    font-weight: 600;
+}
+
+.temp-high {
+    color: var(--danger);
+}
+
+.temp-low {
+    color: var(--accent);
+}
+
+/* Calendar Events */
+.event-item {
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    background: var(--bg-card);
+    border-left: 3px solid var(--accent);
+    border-radius: 0.4rem;
+    transition: transform 0.2s;
+}
+
+.event-item:hover {
+    transform: translateX(5px);
+}
+
+.event-time {
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 0.2rem;
+    font-size: 0.9rem;
+}
+
+.event-title {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+}
+
+.event-calendar {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.no-events {
+    text-align: center;
+    padding: 1.5rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+/* Notes */
+#notes-input {
+    width: 100%;
+    min-height: 200px;
+    padding: 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 1rem;
+    resize: vertical;
+    transition: border-color 0.2s;
+}
+
+#notes-input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.notes-info {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background: var(--bg-secondary);
+    border-radius: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.refresh-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.refresh-btn:hover {
+    background: var(--accent-hover);
+    transform: scale(1.05);
+}
+
+.refresh-btn:active {
+    transform: scale(0.95);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .greeting h1 {
+        font-size: 2rem;
+    }
+
+    .top-row {
+        grid-template-columns: 1fr;
+    }
+
+    .multi-location-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .prayer-table-row,
+    .forecast-table-row {
+        grid-template-columns: 100px 1fr 1fr;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .weather-current-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .weather-details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .current-weather {
+        grid-template-columns: 1fr;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
