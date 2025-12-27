@@ -81,6 +81,11 @@ async function loadConfig() {
 }
 
 function initializeDashboard() {
+    if (!CONFIG) {
+        console.error('CONFIG not loaded yet');
+        return;
+    }
+    
     updateClock();
     updateGreeting();
     generateLocationCards();
