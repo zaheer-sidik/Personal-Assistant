@@ -1,6 +1,7 @@
 // Personal Assistant Dashboard - Main JavaScript
 
 // Global state
+let CONFIG = null; // Will be loaded from Netlify function
 let calendarInitialized = false;
 let gapi = null;
 let tokenClient = null;
@@ -46,13 +47,38 @@ function getWeatherAPICallsRemaining() {
 }
 
 // Initialize dashboard
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
+    // Load config from Netlify function first
+    await loadConfig();
+    
     initializeDashboard();
     setupEventListeners();
     
     // Load Google Calendar API
     loadGoogleCalendarAPI();
 });
+
+// Load configuration from Netlify function
+async function loadConfig() {
+    try {
+        const response = await fetch('/.netlify/functions/config');
+        if (!response.ok) {
+            throw new Error('Failed to load config');
+        }
+        CONFIG = await response.json();
+        console.log('Configuration loaded successfully');
+    } catch (error) {
+        console.error('Error loading config:', error);
+        // Fallback to empty config
+        CONFIG = {
+            locations: [],
+            prayer: { method: 0, school: 0 },
+            weather: { units: 'metric' },
+            calendar: { google: { apiKey: '', clientId: '', calendarIds: [] }, apple: [] },
+            refreshIntervals: { clock: 1000, weather: 600000, prayer: 3600000, calendar: 300000 }
+        };
+    }
+}
 
 function initializeDashboard() {
     updateClock();
@@ -237,14 +263,6 @@ function formatTime12Hour(time24) {
 
 // ===== WEATHER =====
 async function loadWeatherData(location, locationIndex) {
-    if (!CONFIG.weather.apiKey || CONFIG.weather.apiKey === 'YOUR_OPENWEATHERMAP_API_KEY') {
-        return {
-            location: location,
-            error: 'API key not configured',
-            success: false
-        };
-    }
-    
     // Check API rate limit
     if (!checkWeatherAPILimit()) {
         return {
@@ -255,39 +273,29 @@ async function loadWeatherData(location, locationIndex) {
     }
     
     try {
-        // Record this API call (2 calls: current + forecast)
-        recordWeatherAPICall();
+        // Record this API call
         recordWeatherAPICall();
         
-        // Use FREE API 2.5 - Current weather
-        const currentUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&units=${CONFIG.weather.units}&appid=${CONFIG.weather.apiKey}`;
-        const currentResponse = await fetch(currentUrl);
+        // Call Netlify serverless function
+        const functionUrl = `/.netlify/functions/weather?latitude=${location.latitude}&longitude=${location.longitude}&units=${CONFIG.weather.units}`;
+        const response = await fetch(functionUrl);
         
-        if (!currentResponse.ok) {
-            if (currentResponse.status === 401) {
-                throw new Error('Invalid API Key');
-            }
-            throw new Error(`Weather API error: ${currentResponse.status}`);
+        if (!response.ok) {
+            throw new Error(`Weather function error: ${response.status}`);
         }
         
-        const currentData = await currentResponse.json();
+        const data = await response.json();
         
-        // FREE API 2.5 - 5 day forecast (3 hour intervals)
-        const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${location.latitude}&lon=${location.longitude}&units=${CONFIG.weather.units}&appid=${CONFIG.weather.apiKey}`;
-        const forecastResponse = await fetch(forecastUrl);
-        
-        if (!forecastResponse.ok) {
-            throw new Error(`Forecast API error: ${forecastResponse.status}`);
+        if (!data.success) {
+            throw new Error(data.error || 'Unknown error');
         }
-        
-        const forecastData = await forecastResponse.json();
         
         console.log(`Weather API calls remaining today: ${getWeatherAPICallsRemaining()}`);
         
         return {
             location: location,
-            current: currentData,
-            forecast: forecastData.list,
+            current: data.current,
+            forecast: data.forecast,
             success: true
         };
     } catch (error) {
